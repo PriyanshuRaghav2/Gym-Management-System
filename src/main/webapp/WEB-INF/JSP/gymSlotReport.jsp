@@ -91,7 +91,7 @@ tr:hover {
 					<td>${item.slotId}</td>
 					<td>${item.slotTime}</td>
 					<td>${item.pricing}</td>
-					<td><a href=#>Details</a></td>
+					<td><a href=#>See Details</a></td>
 				</tr>
 			</c:forEach>
 		</table>
