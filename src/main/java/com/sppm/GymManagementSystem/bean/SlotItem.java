@@ -12,10 +12,10 @@ public class SlotItem {
 		super();
 		seatBooked=0;
 	}
-	public SlotItem(SlotItemEmbed embeddedId, Integer seatBooked) {
+	public SlotItem(SlotItemEmbed embeddedId) {
 		super();
 		this.embeddedId = embeddedId;
-		this.seatBooked = seatBooked;
+		this.seatBooked = 0;
 	}
 	public SlotItemEmbed getEmbeddedId() {
 		return embeddedId;
