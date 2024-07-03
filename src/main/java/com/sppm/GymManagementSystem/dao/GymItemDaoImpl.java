@@ -10,7 +10,7 @@ import com.sppm.GymManagementSystem.bean.GymItem;
 
 @Repository
 @Service
-public class GymItemDaoImpl implements GymItemDao {
+public  class GymItemDaoImpl implements GymItemDao {
 
 	@Autowired
 	private GymItemRepository repository;
@@ -40,5 +40,9 @@ public class GymItemDaoImpl implements GymItemDao {
 		
 		return val;
 	}
-
+	
+	@Override
+	public Integer findTotalSeatById(Long id){
+		return repository.findTotalSeatById(id);
+	}
 }

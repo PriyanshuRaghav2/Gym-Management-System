@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sppm.GymManagementSystem.bean.GymItem;
+import com.sppm.GymManagementSystem.bean.Item;
 import com.sppm.GymManagementSystem.bean.Slot;
 import com.sppm.GymManagementSystem.bean.SlotItem;
 import com.sppm.GymManagementSystem.bean.SlotItemEmbed;
 import com.sppm.GymManagementSystem.dao.GymItemDao;
 import com.sppm.GymManagementSystem.dao.SlotDao;
 import com.sppm.GymManagementSystem.dao.SlotItemDao;
+import com.sppm.GymManagementSystem.service.GymItemService;
 
 
 @RestController
@@ -30,6 +32,9 @@ public class GymController {
 	
 	@Autowired
 	private SlotItemDao slotItemDao;
+	
+	@Autowired
+	private GymItemService itemService;
 	
 	/*---------------------------------------------------------------------*/
 	/* Home Page Mapping*/
@@ -108,14 +113,19 @@ public class GymController {
 	}
 	
 	@GetMapping("/slot-show/{id}")
-	public ModelAndView showSlotEnquirePage(@PathVariable Long id) {
+	public ModelAndView showSlotBookPage(@PathVariable Long id) {
 		Slot slot = slotDao.findSlotById(id);
-		List<GymItem> itemList = gymItemDao.displayAllItem();
+		List<Item> itemList=itemService.getItemList(id);
 		ModelAndView mv = new ModelAndView("slotBooking");
 		mv.addObject("slot",slot);
 		mv.addObject("itemList", itemList);
-		itemList.forEach(item->System.out.println(item));
 		return mv;
 	}
+	
+//	@GetMapping("/slot-item-add/{id}")
+//	public ModelAndView saveItemSlots(@PathVariable Long id) {
+//		itemService.addNewitemToSlots(id);
+//		return new ModelAndView("index");
+//	}
 	
 }

@@ -77,6 +77,7 @@ tr:hover {
 </style>
 </head>
 <body>
+<jsp:include page="index.jsp" flush="true"/>
 	<div>
 		<header>All Services</header>
 		<table>
@@ -84,12 +85,14 @@ tr:hover {
 				<th>Service Id</th>
 				<th>Service Name</th>
 				<th>Total Seats</th>
+				<th>Add to Slot</th>
 			</tr>
 			<c:forEach items="${itemList}" var="item">
 				<tr>
 					<td>${item.itemId}</td>
 					<td>${item.itemName}</td>
 					<td>${item.totalSeat}</td>
+					<td><a href="/slot-item-add/${item.itemId}">Add to Slots</a></td>
 				</tr>
 			</c:forEach>
 		</table>

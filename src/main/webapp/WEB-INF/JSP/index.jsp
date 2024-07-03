@@ -10,7 +10,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url("/images/gym1.jpg");
+    background-image: url("/images/gym3.jpg");
     background-size: cover;
     background-position: unset; 
     background-repeat: no-repeat;

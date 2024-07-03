@@ -87,6 +87,7 @@ a:hover {
 </style>
 </head>
 <body>
+<jsp:include page="index.jsp" flush="true"/>
 <div class="header">
         Gym Services
     </div>

@@ -38,6 +38,22 @@ public class SlotItemEmbed implements Serializable{
 		else
 			return false;
 	}
+
+	public Long getSlotId() {
+		return slotId;
+	}
+
+	public void setSlotId(Long slotId) {
+		this.slotId = slotId;
+	}
+
+	public Long getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
+	}
 	
 	
 	
