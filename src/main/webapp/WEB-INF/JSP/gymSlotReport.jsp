@@ -90,7 +90,6 @@ tr:hover {
 </style>
 </head>
 <body>
-<jsp:include page="index.jsp" flush="true"/>
     <div>
         <header>All Slots</header>
         <table>

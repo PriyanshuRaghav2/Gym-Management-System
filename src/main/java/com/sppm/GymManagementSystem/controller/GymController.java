@@ -122,10 +122,10 @@ public class GymController {
 		return mv;
 	}
 	
-//	@GetMapping("/slot-item-add/{id}")
-//	public ModelAndView saveItemSlots(@PathVariable Long id) {
-//		itemService.addNewitemToSlots(id);
-//		return new ModelAndView("index");
-//	}
+	@GetMapping("/slot-item-add/{id}")
+	public ModelAndView saveItemSlots(@PathVariable Long id) {
+		itemService.addNewitemToSlots(id);
+		return new ModelAndView("index");
+	}
 	
 }

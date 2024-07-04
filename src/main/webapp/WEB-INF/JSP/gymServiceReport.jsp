@@ -26,15 +26,15 @@ header {
 a {
 	text-decoration: none;
 	font-size: 20px;
-	color: white;
+	color: silver;
 	margin: 50px;
 	font-weight: 700;
 }
 
 a:hover {
 	text-decoration: underline;
-	color: yellow;
-	background-color: white;
+	color: gray;
+	background-color: darkgray;
 }
 
 ul {
@@ -77,7 +77,6 @@ tr:hover {
 </style>
 </head>
 <body>
-<jsp:include page="index.jsp" flush="true"/>
 	<div>
 		<header>All Services</header>
 		<table>

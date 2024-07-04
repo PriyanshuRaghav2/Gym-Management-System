@@ -12,21 +12,26 @@ public class SlotItem {
 		super();
 		seatBooked=0;
 	}
+	
 	public SlotItem(SlotItemEmbed embeddedId) {
 		super();
 		this.embeddedId = embeddedId;
 		this.seatBooked = 0;
 	}
+	
 	public SlotItemEmbed getEmbeddedId() {
 		return embeddedId;
 	}
+	
 	public void setEmbeddedId(SlotItemEmbed embeddedId) {
 		this.embeddedId = embeddedId;
 	}
+	
 	public Integer getSeatBooked() {
 		return seatBooked;
 	}
-	public void setSeatAvailable(Integer seatBooked) {
+	
+	public void setSeatBooked(Integer seatBooked) {
 		this.seatBooked = seatBooked;
 	}
 	

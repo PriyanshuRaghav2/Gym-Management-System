@@ -116,7 +116,7 @@
                         <td>${item.itemId}</td>
                         <td>${item.itemName}</td>
                         <td>${item.totalSeat}</td>
-                        <td>0</td>
+                        <td>${item.seatVacent}</td>
                         <td><input name="selectItem" type="radio" value="${item.itemId}"/></td>
                     </tr>
                 </c:forEach>

@@ -15,4 +15,6 @@ public interface SlotItemRepository extends JpaRepository<SlotItem, SlotItemEmbe
     
     @Query("SELECT a.embeddedId FROM SlotItem a")
     public Set<SlotItemEmbed> findAllEmbeds();
+    
+    
 }

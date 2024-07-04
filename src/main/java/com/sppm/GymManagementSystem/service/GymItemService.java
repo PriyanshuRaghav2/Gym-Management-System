@@ -2,6 +2,7 @@ package com.sppm.GymManagementSystem.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class GymItemService {
 		List<Item> itemList =new ArrayList<>();
 		List<GymItem> gymList=gymItemDao.displayAllItem();
 		for(GymItem gym: gymList) {
-			Item item = new Item();
+			Item item = new Item(gym);
 			SlotItemEmbed embed = new SlotItemEmbed(slotId, gym.getItemId());
 			Integer seatBooked=slotItemDao.findSeatBookedById(embed);
 			if(seatBooked == null)
@@ -41,21 +42,21 @@ public class GymItemService {
 		return itemList;
 	}
 	
-//	public void addNewitemToSlots(Long itemId) {
-//		Set<SlotItemEmbed> embedSet=slotItemDao.findAllEmbeds();
-//		Map<Long, Long> embedMap=new HashMap<>();
-//		for(SlotItemEmbed embed:embedSet) {
-//			embedMap.put(embed.getItemId(), embed.getSlotId());
-//		}
-//		if(embedMap.containsKey(itemId)==false) {
-//			Set<Long> itemIdSet=embedMap.keySet();
-//			for(Long id:itemIdSet) {
-//				Long slotId=embedMap.get(id);
-//				SlotItemEmbed embed = new SlotItemEmbed(slotId,itemId);
-//				SlotItem slotItem = new SlotItem(embed);
-//				slotItemDao.save(slotItem);
-//			}
-//		}
-//	}
-
+	public void addNewitemToSlots(Long itemId) {
+		Set<SlotItemEmbed> embedSet=slotItemDao.findAllEmbed();
+		Set<Long> itemSet=new HashSet<>();
+		Set<Long> slotSet=new HashSet<>();
+		
+		for(SlotItemEmbed embed:embedSet) {
+			itemSet.add(embed.getItemId());
+			slotSet.add(embed.getSlotId());
+		}
+		if(itemSet.contains(itemId)==false) {
+			for(Long slotId:slotSet) {
+				SlotItemEmbed embed = new SlotItemEmbed(slotId,itemId);
+				SlotItem slotItem = new SlotItem(embed);
+				slotItemDao.save(slotItem);
+			}
+		}
+	}
 }
