@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -98,6 +98,14 @@ button:hover {
     text-decoration: underline;
 }
 
+.radio-group {
+    text-align: left;
+    margin: 1rem 0;
+}
+
+.radio-group label {
+    margin-right: 1rem;
+}
 </style>
 <script type="text/javascript">
 function validatePassword() {
@@ -109,7 +117,6 @@ function validatePassword() {
         return false;
     }
 
-    
     if (password.length < 8) {
         alert("Password must be at least 8 characters long.");
         return false;
@@ -125,9 +132,12 @@ function validatePassword() {
     </div>
     <div class="container">
         <h2>Register</h2>
-        <form:form action="/register" method="post" onsubmit="return validatePassword()" modelAttribute ="userRecord">
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
+        <form:form action="/register" method="post" onsubmit="return validatePassword()" modelAttribute="userRecord">
+            <label for="fullname">First Name:</label>
+            <input type="text" id="firstname" name="firstName" required>
+            
+            <label for="fullname">Last Name:</label>
+            <input type="text" id="lastname" name="lastName" required>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
@@ -142,8 +152,14 @@ function validatePassword() {
             <label for="confirm-password">Confirm Password:</label>
             <input type="password" id="confirm-password" name="confirm-password" required>
 
+            <div class="radio-group">
+                <label>User Type:</label>
+                <label><input type="radio" name="type" value="admin" required> Admin</label>
+                <label><input type="radio" name="type" value="customer" required> Customer</label>
+            </div>
+
             <button type="submit">Register</button>
-        </form:form >
+        </form:form>
         <a href="/loginpage" class="login-link">Already have an account? Login</a>
     </div>
 </body>

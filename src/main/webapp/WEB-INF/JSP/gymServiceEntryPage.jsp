@@ -95,9 +95,9 @@ a:hover {
         <form action="/gymService" method="post">
             <input type="hidden" name="itemId" value="${itemRecord.itemId}" />
             <label for="itemName">Enter Service Name:</label>
-            <input type="text" id="itemName" name="itemName" />
+            <input type="text" id="itemName" name="itemName" requried />
             <label for="totalSeat">Enter Total Seats:</label>
-            <input type="number" id="totalSeat" name="totalSeat" />
+            <input type="number" id="totalSeat" name="totalSeat" requried/>
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
             <a href="/index">Home</a>

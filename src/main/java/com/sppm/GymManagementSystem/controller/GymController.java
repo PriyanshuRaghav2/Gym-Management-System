@@ -19,6 +19,7 @@ import com.sppm.GymManagementSystem.dao.GymItemDao;
 import com.sppm.GymManagementSystem.dao.SlotDao;
 import com.sppm.GymManagementSystem.dao.SlotItemDao;
 import com.sppm.GymManagementSystem.service.GymItemService;
+import com.sppm.GymManagementSystem.service.GymUserService;
 
 
 @RestController
@@ -36,12 +37,21 @@ public class GymController {
 	@Autowired
 	private GymItemService itemService;
 	
+	@Autowired
+	private GymUserService userService;
+	
 	/*---------------------------------------------------------------------*/
 	/* Home Page Mapping*/
-	
 	@GetMapping("/index")
-	public ModelAndView showIndex() {
-		return new ModelAndView("index");
+	public ModelAndView showIndexPage() {
+		String indexPage="";
+		String userType=userService.getType();
+		if(userType.equalsIgnoreCase("Admin"))
+			indexPage="AdmIndex";
+		else if(userType.equalsIgnoreCase("Customer"))
+			indexPage="CusIndex";
+			
+		return new ModelAndView(indexPage);
 	}
 	
 	/*---------------------------------------------------------------------*/
@@ -68,7 +78,7 @@ public class GymController {
 	@PostMapping("/gymService")
 	public ModelAndView saveGymService(@ModelAttribute("itemRecord") GymItem gymItem) {
 		gymItemDao.saveNewItem(gymItem);
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/index");
 	}
 	
 	@GetMapping("/gymServiceReport")
@@ -101,7 +111,7 @@ public class GymController {
 			SlotItem slotitem = new SlotItem(embed);
 			slotItemDao.save(slotitem);
 		}
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/index");
 	}
 	
 	@GetMapping("/gymSlotReport")
@@ -125,7 +135,7 @@ public class GymController {
 	@GetMapping("/slot-item-add/{id}")
 	public ModelAndView saveItemSlots(@PathVariable Long id) {
 		itemService.addNewitemToSlots(id);
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/index");
 	}
 	
 }

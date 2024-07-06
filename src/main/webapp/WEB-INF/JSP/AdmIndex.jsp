@@ -97,8 +97,7 @@ li ul li a:hover {
 						<li><a href="/gymSlotEntryPage">Add Gym Slot</a></li>
 						<li><a href="/gymSlotReport">View Gym Slots</a></li>
 					</ul></li>
-				<li><a href="/queries">Queries</a></li>
-				<li><a href="/logout">Logout</a>&nbsp;&nbsp;</li>
+				<li><a href="/logout">Logout</a></li>
 			</ul>
 		</h3>
 	</div>
