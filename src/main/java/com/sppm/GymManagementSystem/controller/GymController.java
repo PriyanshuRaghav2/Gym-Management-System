@@ -55,11 +55,11 @@ public class GymController {
 	}
 	
 	/*---------------------------------------------------------------------*/
-	/*Query page Mapping*/
+	/*FeedBack Form page Mapping*/
 	
-	@GetMapping("/queries")
+	@GetMapping("/feedback")
 	public ModelAndView showQueries() {
-		return new ModelAndView("queries");
+		return new ModelAndView("feedback");
 	}
 	
 	/*---------------------------------------------------------------------*/
