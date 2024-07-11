@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import com.sppm.GymManagementSystem.bean.SlotItemEmbed;
 import com.sppm.GymManagementSystem.dao.GymItemDao;
 import com.sppm.GymManagementSystem.dao.SlotDao;
 import com.sppm.GymManagementSystem.dao.SlotItemDao;
+import com.sppm.GymManagementSystem.exception.SeatNotAvailableException;
 import com.sppm.GymManagementSystem.service.GymItemService;
 import com.sppm.GymManagementSystem.service.GymUserService;
 
@@ -126,7 +128,7 @@ public class GymController {
 	public ModelAndView showSlotBookPage(@PathVariable Long id) {
 		Slot slot = slotDao.findSlotById(id);
 		List<Item> itemList=itemService.getItemList(id);
-		ModelAndView mv = new ModelAndView("slotBooking");
+		ModelAndView mv = new ModelAndView("slotBookingCustomer");
 		mv.addObject("slot",slot);
 		mv.addObject("itemList", itemList);
 		return mv;
@@ -136,6 +138,49 @@ public class GymController {
 	public ModelAndView saveItemSlots(@PathVariable Long id) {
 		itemService.addNewitemToSlots(id);
 		return new ModelAndView("redirect:/index");
+	}
+	
+	@PostMapping("/slot-book")
+    public ModelAndView saveSlotBooking(@RequestParam("slotId") Long slotId, @RequestParam("itemId") Long itemId) {
+		GymItem gymItem=gymItemDao.findItemById(itemId);
+        SlotItemEmbed embed = new SlotItemEmbed(slotId, itemId);
+        int totalSeat = gymItem.getTotalSeat();
+        SlotItem slotItem = slotItemDao.findById(embed);
+        int seatBooked = slotItemDao.findSeatBookedById(embed);
+        int available = totalSeat - seatBooked;
+        
+        if(available>0) {
+        	seatBooked++;
+        	slotItem.setSeatBooked(seatBooked);
+        	slotItemDao.save(slotItem);
+        }
+        else
+        	throw new SeatNotAvailableException();
+        
+        return new ModelAndView("redirect:/index");
+    }
+	
+	@GetMapping("/slot-book/{id}")
+	public ModelAndView showSlotBooking(@PathVariable Long id) {
+		String fname="";
+		String userType=userService.getType();
+		if(userType.equalsIgnoreCase("Admin")) {
+			fname="slotBookingAdmin";
+		}
+		else if(userType.equalsIgnoreCase("Customer")) {
+			fname="slotBookingCustomer";
+		}
+		Slot slot=slotDao.findSlotById(id);
+		List<Item> itemList=itemService.getItemList(id);
+		ModelAndView mv=new ModelAndView(fname);
+		mv.addObject("slot", slot);
+		mv.addObject("itemList", itemList);
+		if(userType.equalsIgnoreCase("Admin")) {
+			List<String> userList=userService.getAllCustomer();
+			mv.addObject("userList", userList);
+		}
+		
+		return mv;
 	}
 	
 }

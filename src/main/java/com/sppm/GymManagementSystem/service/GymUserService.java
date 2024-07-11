@@ -1,5 +1,7 @@
 package com.sppm.GymManagementSystem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,5 +30,9 @@ public class GymUserService implements UserDetailsService {
 		GymUser users= repository.findById(username).get();
 		type=users.getType();
 		return users;
+	}
+	
+	public List<String> getAllCustomer(){
+		return repository.findAllCoustomerUsers();
 	}
 }

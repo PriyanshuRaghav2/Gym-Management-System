@@ -10,4 +10,5 @@ public interface SlotItemDao {
 	public void save(SlotItem slotitem);
 	public Integer findSeatBookedById(SlotItemEmbed id);
 	public Set<SlotItemEmbed> findAllEmbed();
+	public SlotItem findById(SlotItemEmbed embed);
 }

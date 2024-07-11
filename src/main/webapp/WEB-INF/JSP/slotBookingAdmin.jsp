@@ -95,14 +95,21 @@
 </style>
 </head>
 <body>
-    <div>
+    <div> 
         <h3>Slot ID: ${slot.slotId}</h3>
         <h3>Slot Time: ${slot.slotTime}</h3>
         <h3>Pricing: ${slot.pricing}</h3>
     </div>
     <div>
-        <form>
+        <form action="/slot-book" method="post">
             <input type="hidden" value="${slot.slotId}" name="slot_id"/>
+            Select User Id:<input list="users" name="userId"/>
+            <detailist>
+            <c:forEach items="${userList}" var="user">
+            <option value="${user}">
+            </option>
+            </c:forEach>
+            </detailist>
             <table>
                 <tr>
                     <th>Item No</th>
