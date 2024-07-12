@@ -102,7 +102,7 @@
     </div>
     <div>
         <form action="/slot-book" method="post">
-            <input type="hidden" value="${slot.slotId}" name="slot_id"/>
+            <input type="hidden" value="${slot.slotId}" name="slotId"/>
             <table>
                 <tr>
                     <th>Item No</th>
@@ -117,7 +117,7 @@
                         <td>${item.itemName}</td>
                         <td>${item.totalSeat}</td>
                         <td>${item.seatVacent}</td>
-                        <td><input name="selectItem" type="radio" value="${item.itemId}"/></td>
+                        <td><input name="itemId" type="radio" value="${item.itemId}"/></td>
                     </tr>
                 </c:forEach>
             </table>

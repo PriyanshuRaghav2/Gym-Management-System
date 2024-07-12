@@ -102,14 +102,14 @@
     </div>
     <div>
         <form action="/slot-book" method="post">
-            <input type="hidden" value="${slot.slotId}" name="slot_id"/>
-            Select User Id:<input list="users" name="userId"/>
-            <detailist>
+            <input type="hidden" value="${slot.slotId}" name="slotId"/>
+            Select User Id:<input list="users" name="username"/>
+            <datalist>
             <c:forEach items="${userList}" var="user">
             <option value="${user}">
             </option>
             </c:forEach>
-            </detailist>
+            </datalist>
             <table>
                 <tr>
                     <th>Item No</th>
@@ -124,7 +124,7 @@
                         <td>${item.itemName}</td>
                         <td>${item.totalSeat}</td>
                         <td>${item.seatVacent}</td>
-                        <td><input name="selectItem" type="radio" value="${item.itemId}"/></td>
+                        <td><input name="itemId" type="radio" value="${item.itemId}"/></td>
                     </tr>
                 </c:forEach>
             </table>

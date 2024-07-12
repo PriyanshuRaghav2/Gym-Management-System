@@ -46,4 +46,5 @@ public class GymBookDaoImpl implements GymBookDao {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
 }

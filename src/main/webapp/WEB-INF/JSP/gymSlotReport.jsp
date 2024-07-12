@@ -104,7 +104,7 @@ tr:hover {
                     <td>${slot.slotId}</td>
                     <td>${slot.slotTime}</td>
                     <td>${slot.pricing}</td>
-                    <td><a href="/slot-show/${slot.slotId}">See Enquire</a></td>
+                    <td><a href="/slot-book/${slot.slotId}">See Enquire</a></td>
                 </tr>
             </c:forEach>
         </table>

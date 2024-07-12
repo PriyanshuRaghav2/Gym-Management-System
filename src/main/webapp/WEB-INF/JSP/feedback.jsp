@@ -85,7 +85,7 @@ button:hover {
 </head>
 <body>
 	<div class="container">
-		<form action="post">
+		<form action="/feedback" method="post">
 			<h2>Write us your Feedback</h2>
 			<label for="fname">First name:</label><br> 
 			<input type="text"id="fname" name="fname" required><br> 
@@ -96,7 +96,7 @@ button:hover {
 			<label for="feedback">Write Your Feedback:</label><br />
 			<textarea name="feedback" rows="10" cols="30"placeholder="Write Us your Feedback"></textarea>
 			<input type="submit" value="Submit">
-			<button onclick="location.href='/index'">Home</button>
+			<a href="/index"><button>Home</button></a>
 		</form>
 	</div>
 

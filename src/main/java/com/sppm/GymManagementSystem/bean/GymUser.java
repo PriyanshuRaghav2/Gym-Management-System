@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
+@Component
 public class GymUser extends User{
 	
 	@Id

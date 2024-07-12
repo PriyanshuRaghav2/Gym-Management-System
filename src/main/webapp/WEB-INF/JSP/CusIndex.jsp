@@ -88,7 +88,8 @@ li ul li a:hover {
 			<ul>
 				<li><a href="/index">Home</a></li>
 				<li><a href="/gymSlotReport">Book You Space</a></li>
-				<li><a href="/queries">FeedBack</a></li>
+				<li><a href="/customerBooking">Booking-Details</a></li>
+				<li><a href="/feedback">FeedBack</a></li>
 				<li><a href="/logout">Logout</a>&nbsp;&nbsp;</li>
 			</ul>
 		</h3>
