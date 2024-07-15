@@ -20,13 +20,8 @@ public class GymBookDaoImpl implements GymBookDao {
 	}
 
 	@Override
-	public List<GymBook> getBookList() {
-		return repository.findAll();
-	}
-
-	@Override
 	public GymBook findBookInfoById(Long id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -46,5 +41,16 @@ public class GymBookDaoImpl implements GymBookDao {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	@Override
+	public List<GymBook> getUserNameBookList(String username) {
+		return repository.findBookListByUserName(username);
+	}
+
+	@Override
+	public List<GymBook> getBookList() {
+		return repository.findAll();
+	}
+
 
 }

@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class GymBook {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bookingId;
 	private Long slotId;
 	private Long itemId;

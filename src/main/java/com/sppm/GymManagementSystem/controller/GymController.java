@@ -1,5 +1,6 @@
 package com.sppm.GymManagementSystem.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,7 +151,7 @@ public class GymController {
 	}
 	
 	@PostMapping("/slot-book")
-    public ModelAndView saveSlotBooking(@RequestParam("slotId") Long slotId, @RequestParam("itemId") Long itemId) {
+    public ModelAndView saveSlotBooking(@RequestParam("slotId") Long slotId, @RequestParam("itemId") Long itemId, Principal principal) {
 		GymItem gymItem=gymItemDao.findItemById(itemId);
         SlotItemEmbed embed = new SlotItemEmbed(slotId, itemId);
         int totalSeat = gymItem.getTotalSeat();
@@ -171,7 +172,18 @@ public class GymController {
         Slot slot = slotDao.findSlotById(slotId);
         GymItem item = gymItemDao.findItemById(itemId);
 		mv.addObject("slot", slot); 
-		mv.addObject("item", item); 
+		mv.addObject("item", item);
+		
+		GymBook gymBook = new GymBook();
+		Long bookingId = gymBookDao.generateBookingId();
+		gymBook.setBookingId(bookingId);
+        gymBook.setSlotId(slotId);
+        gymBook.setItemId(itemId);
+        
+        String username = principal.getName();
+        gymBook.setUserName(username);
+        
+        gymBookDao.save(gymBook);
         
         
         return mv;
@@ -201,8 +213,9 @@ public class GymController {
 	}
 	
 	@GetMapping("/adminBookingDetails")
-	public ModelAndView showAdminBookingDetails() {
-	    List<GymBook> bookingList = gymBookDao.getBookList();
+	public ModelAndView showAdminBookingDetails(Principal principal) {
+		List<GymBook> bookingList = gymBookDao.getBookList();
+	    
 	    
 	    ModelAndView mv = new ModelAndView("adminBookingDetails");
 	    mv.addObject("bookingList", bookingList);
@@ -211,15 +224,16 @@ public class GymController {
 	}
 	
 	@GetMapping("/customerBooking")
-	public ModelAndView showMyBookings() {
-	    
-	    String bookingList = user.getUsername();
+	public ModelAndView showMyBookings(Principal principal) {
+	    String username = principal.getName();
+	    List<GymBook> bookingList = gymBookDao.getUserNameBookList(username);
 	    
 	    ModelAndView mv = new ModelAndView("customerBooking");
 	    mv.addObject("bookingList", bookingList);
 	    
 	    return mv;
 	}
+
 
 	
 }

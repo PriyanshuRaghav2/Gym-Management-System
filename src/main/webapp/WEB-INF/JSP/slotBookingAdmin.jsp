@@ -106,7 +106,7 @@
             Select User Id:<input list="users" name="username"/>
             <datalist>
             <c:forEach items="${userList}" var="user">
-            <option value="${user}">
+            <option value="${usr}">
             </option>
             </c:forEach>
             </datalist>
