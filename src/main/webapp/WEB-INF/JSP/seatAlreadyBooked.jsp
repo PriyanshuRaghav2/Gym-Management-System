@@ -1,13 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Booking Successful</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Already Booked</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url("/images/gym4.jpg");
+            background-image: url("/images/gym2.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -76,10 +78,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Booking Successful!</h1>
-        <p>Your slot has been successfully booked.</p>
-        <p>Slot Timing: ${slot.slotTime}</p>
-        <p>Gym Service: ${item.itemName}</p>
+        <h1>Seat Already Booked for this Slot Timing</h1>
+        <p>Please select a different slot or contact the administrator for assistance.</p>
         <div class="button-container">
             <a href="/index"><button class="home-button">Home</button></a>
         </div>

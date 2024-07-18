@@ -117,7 +117,7 @@
                         <td>${item.itemName}</td>
                         <td>${item.totalSeat}</td>
                         <td>${item.seatVacent}</td>
-                        <td><input name="itemId" type="radio" value="${item.itemId}"/></td>
+                        <td><input name="itemId" type="radio" value="${item.itemId}" required/></td>
                     </tr>
                 </c:forEach>
             </table>

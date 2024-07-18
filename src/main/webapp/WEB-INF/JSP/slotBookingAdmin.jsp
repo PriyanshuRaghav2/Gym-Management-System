@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,7 @@
         margin: 20px 0;
     }
 
-    div {
+    .container {
         background-color: rgba(255, 255, 255, 0.8);
         border-radius: 10px;
         padding: 20px;
@@ -91,25 +90,44 @@
     .home-button:hover {
         background-color: #333;
     }
-    
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+
+    .input-group {
+        margin: 20px 0;
+    }
+
+    .input-group input[type="text"], .input-group input[list] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
 </style>
 </head>
 <body>
-    <div> 
+    <div class="container"> 
         <h3>Slot ID: ${slot.slotId}</h3>
         <h3>Slot Time: ${slot.slotTime}</h3>
         <h3>Pricing: ${slot.pricing}</h3>
     </div>
-    <div>
-        <form action="/slot-book" method="post">
+    <div class="container">
+        <form action="/admin-slot-book" method="post">
             <input type="hidden" value="${slot.slotId}" name="slotId"/>
-            Select User Id:<input list="users" name="username"/>
-            <datalist>
-            <c:forEach items="${userList}" var="user">
-            <option value="${usr}">
-            </option>
-            </c:forEach>
-            </datalist>
+            <div class="input-group">
+                <label for="username">Select User ID:</label>
+                <input list="users" name="username" id="username" required/>
+                <datalist id="users">
+                    <c:forEach items="${userList}" var="user">
+                        <option value="${user}"></option>
+                    </c:forEach>
+                </datalist>
+            </div>
             <table>
                 <tr>
                     <th>Item No</th>
@@ -124,7 +142,7 @@
                         <td>${item.itemName}</td>
                         <td>${item.totalSeat}</td>
                         <td>${item.seatVacent}</td>
-                        <td><input name="itemId" type="radio" value="${item.itemId}"/></td>
+                        <td><input name="itemId" type="radio" value="${item.itemId}" required/></td>
                     </tr>
                 </c:forEach>
             </table>

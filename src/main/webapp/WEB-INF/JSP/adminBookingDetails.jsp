@@ -14,23 +14,27 @@
         color: #333;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     h1 {
         text-align: center;
         margin: 20px 0;
+        color: #4CAF50;
     }
 
     table {
         width: 80%;
-        margin: 20px auto;
+        margin: 20px 0;
         border-collapse: collapse;
         background-color: white;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     th, td {
-        padding: 10px;
+        padding: 12px;
         text-align: center;
         border: 1px solid #ddd;
     }
@@ -48,16 +52,42 @@
         background-color: #ddd;
     }
 
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
     .home-link {
         display: block;
         text-align: center;
         margin-top: 20px;
+        color: #4CAF50;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .home-link:hover {
+        text-decoration: underline;
     }
 </style>
 </head>
 <body>
     <h1>Admin Booking Details</h1>
-    
+
     <table>
         <tr>
             <th>Booking ID</th>
@@ -72,7 +102,9 @@
                 <td>${booking.userName}</td>
                 <td>${booking.slotId}</td>
                 <td>${booking.itemId}</td>
-                <td><a href="/delete-booking/${booking.bookingId}">Delete</a></td>
+                <td><a href="/delete-booking/${booking.bookingId}">
+                        <button type="button">Delete</button>
+                    </a></td>
             </tr>
         </c:forEach>
     </table>
