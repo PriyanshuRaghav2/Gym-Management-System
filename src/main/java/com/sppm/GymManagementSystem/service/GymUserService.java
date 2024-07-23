@@ -32,11 +32,16 @@ public class GymUserService implements UserDetailsService {
 		return users;
 	}
 	
-	public List<String> getAllCustomer(){
+	public List<GymUser> getAllCustomer(){
 		return repository.findAllCoustomerUsers();
 	}
 	
 	public GymUser getUser() {
 		return users;
+	}
+
+	public void deleteUserById(String username) {
+		repository.delete(users);
+		
 	}
 }

@@ -85,6 +85,7 @@ tr:hover {
 				<th>Service Name</th>
 				<th>Total Seats</th>
 				<th>Add to Slot</th>
+				<th>Update the Slot</th>
 			</tr>
 			<c:forEach items="${itemList}" var="item">
 				<tr>
@@ -92,6 +93,7 @@ tr:hover {
 					<td>${item.itemName}</td>
 					<td>${item.totalSeat}</td>
 					<td><a href="/slot-item-add/${item.itemId}">Add to Slots</a></td>
+					<td><a href="/updateGymItem/${item.itemId}">Update</a></td>
 				</tr>
 			</c:forEach>
 		</table>

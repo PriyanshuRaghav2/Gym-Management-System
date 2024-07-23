@@ -91,13 +91,13 @@ a:hover {
         Gym Services
     </div>
     <div class="form-container">
-        <form action="/gymSlot" method="post">
+        <form action="/slot-update" method="post">
             <input type="hidden" name="slotId" value="${itemRecord.slotId}" />
-            <label for="slotTime">Enter Slot Timing:</label>
-            <input type="text" id="slotTime" name="slotTime" />
-            <label for="pricing">Enter Slot Pricing:</label>
-            <input type="number" id="pricing" name="pricing" />
-            <button type="submit">Submit</button>
+            <label for="slotTime">Enter Updated Slot Timing:</label>
+            <input type="text" id="slotTime" name="slotTime"  value="${itemRecord.slotTime}" />
+            <label for="pricing">Enter Updated Slot Pricing:</label>
+            <input type="number" id="pricing" name="pricing"  value="${itemRecord.pricing}"/ >
+            <button type="submit">Update</button>
             <button type="reset">Reset</button>
             <a href="/index">Home</a>
         </form>

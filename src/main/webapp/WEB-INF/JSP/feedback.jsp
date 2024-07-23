@@ -87,14 +87,15 @@ button:hover {
 	<div class="container">
 		<form action="/feedback" method="post">
 			<h2>Write us your Feedback</h2>
-			<label for="fname">First name:</label><br> 
-			<input type="text"id="fname" name="fname" required><br> 
-			<label for="lname">Last name:</label><br> 
-			<input type="text"id="lname" name="lname" required><br> 
-			<label for="email">Email:</label><br>
-			<input type="email" id="email" name="email" required><br>
+			<input type="hidden" name="feedbackId" value="${feedback.feedbackId}"/>
+			<label for="fname">User name:</label><br> 
+			<input type="text"id="username" name="username" required><br>
+			 
 			<label for="feedback">Write Your Feedback:</label><br />
-			<textarea name="feedback" rows="10" cols="30"placeholder="Write Us your Feedback"></textarea>
+			<textarea name="feedbackContent" rows="10" cols="30"placeholder="Write Us your Feedback"></textarea>
+			
+			<input type="hidden" name="timestamp" value="${feedback.timestamp}"/>
+			
 			<input type="submit" value="Submit">
 			<a href="/index"><button>Home</button></a>
 		</form>

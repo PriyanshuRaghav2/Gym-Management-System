@@ -42,7 +42,7 @@ body {
 
 .form-container form label {
     margin-bottom: 10px;
-    color: white; /* Ensure labels are visible */
+    color: white;
 }
 
 .form-container form input[type="text"],
@@ -52,7 +52,7 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    width: calc(100% - 22px); /* Adjusted width calculation for inputs */
+    width: calc(100% - 22px);
 }
 
 .form-container form button {

@@ -1,6 +1,7 @@
 package com.sppm.GymManagementSystem.controller;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sppm.GymManagementSystem.bean.Feedback;
 import com.sppm.GymManagementSystem.bean.GymBook;
 import com.sppm.GymManagementSystem.bean.GymItem;
 import com.sppm.GymManagementSystem.bean.GymUser;
@@ -20,6 +22,7 @@ import com.sppm.GymManagementSystem.bean.Item;
 import com.sppm.GymManagementSystem.bean.Slot;
 import com.sppm.GymManagementSystem.bean.SlotItem;
 import com.sppm.GymManagementSystem.bean.SlotItemEmbed;
+import com.sppm.GymManagementSystem.dao.FeedbackDao;
 import com.sppm.GymManagementSystem.dao.GymBookDao;
 import com.sppm.GymManagementSystem.dao.GymItemDao;
 import com.sppm.GymManagementSystem.dao.SlotDao;
@@ -52,6 +55,9 @@ public class GymController {
 
 	@Autowired
 	private GymUser user;
+	
+	@Autowired
+	private FeedbackDao feedbackDao;
 
 	/*---------------------------------------------------------------------*/
 	/* Home Page Mapping */
@@ -67,14 +73,7 @@ public class GymController {
 		return new ModelAndView(indexPage);
 	}
 
-	/*---------------------------------------------------------------------*/
-	/* FeedBack Form page Mapping */
-
-	@GetMapping("/feedback")
-	public ModelAndView showFeedbacks() {
-		return new ModelAndView("feedback");
-	}
-
+	
 	/*---------------------------------------------------------------------*/
 	/* Gym Service Mappings */
 
@@ -127,10 +126,18 @@ public class GymController {
 		return new ModelAndView("redirect:/index");
 	}
 
-	@GetMapping("/gymSlotReport")
-	public ModelAndView showGymSlotTable() {
+	@GetMapping("/admin-gymSlotReport")
+	public ModelAndView showAdminGymSlotTable() {
 		List<Slot> slotList = slotDao.displayAllSlot();
-		ModelAndView mv = new ModelAndView("gymSlotReport");
+		ModelAndView mv = new ModelAndView("admin-gymSlotReport");
+		mv.addObject("slotList", slotList);
+		return mv;
+	}
+	
+	@GetMapping("/customer-gymSlotReport")
+	public ModelAndView showCustomerGymSlotTable() {
+		List<Slot> slotList = slotDao.displayAllSlot();
+		ModelAndView mv = new ModelAndView("customer-gymSlotReport");
 		mv.addObject("slotList", slotList);
 		return mv;
 	}
@@ -271,7 +278,7 @@ public class GymController {
 		mv.addObject("slot", slot);
 		mv.addObject("itemList", itemList);
 		if (userType.equalsIgnoreCase("Admin")) {
-			List<String> userList = userService.getAllCustomer();
+			List<GymUser> userList = userService.getAllCustomer();
 			mv.addObject("userList", userList);
 		}
 
@@ -341,5 +348,92 @@ public class GymController {
 
 		return new ModelAndView("redirect:/adminBookingDetails");
 	}
+	
+	 @GetMapping("/updateGymItem/{id}")
+	    public ModelAndView showUpdateGymItemPage(@PathVariable("id") Long id) {
+	        GymItem gymItem = gymItemDao.findItemById(id);
+	            ModelAndView mv = new ModelAndView("updateGymItem");
+	            mv.addObject("gymItem", gymItem);
+	            return mv;
+	    }
 
+    @PostMapping("/updateGymItem")
+    public ModelAndView updateGymItem(@RequestParam("itemId") Long itemId,
+                                      @RequestParam("itemName") String itemName,
+                                      @RequestParam("totalSeat") int totalSeat) {
+        GymItem gymItem = gymItemDao.findItemById(itemId);
+        if (gymItem != null) {
+            gymItem.setItemName(itemName);
+            gymItem.setTotalSeat(totalSeat);
+            gymItemDao.saveNewItem(gymItem);
+        }
+        return new ModelAndView("redirect:/gymServiceReport");
+    }
+    
+    
+    @GetMapping("/slot-update/{id}")
+    public ModelAndView showUpdateSlotItemPage(@PathVariable("id") Long id) {
+    	Slot slot = slotDao.findSlotById(id);
+    	ModelAndView mv = new ModelAndView("updateSlot");
+    	mv.addObject("itemRecord", slot);
+    	return mv;
+    }
+   
+    
+    @PostMapping("/slot-update")
+    public ModelAndView updateSlotPage(@RequestParam("slotTime") String slotTime,
+    								   @RequestParam("pricing") Double pricing,
+    								   @RequestParam("slotId") Long slotId){
+		
+    	Slot slot = slotDao.findSlotById(slotId);
+    	if(slot != null) {
+    		slot.setSlotTime(slotTime);
+    		slot.setPricing(pricing);
+    		slotDao.saveNewItem(slot);
+    	}
+    	
+    	return new ModelAndView("redirect:/admin-gymSlotReport");
+    }
+    	
+    	/*---------------------------------------------------------------------*/
+    	/* FeedBack Form page Mapping */
+
+    	@GetMapping("/feedback")
+        public ModelAndView showFeedbackForm() {
+            return new ModelAndView("feedback");
+        }
+
+        @PostMapping("/feedback")
+        public ModelAndView submitFeedback(@ModelAttribute Feedback feedback, @RequestParam("username") String username,@RequestParam("feedbackContent") String feedbackContent) {
+        	feedback.setTimestamp(LocalDateTime.now());
+        	feedbackDao.saveFeedback(feedback);
+            return new ModelAndView("thankyou");
+        }
+        
+        @GetMapping("/Feedback-Details")
+        public ModelAndView showFeedbackDetails() {
+            List<Feedback> feedbackList = feedbackDao.getAllFeedbacks();
+            System.out.println("Feedback List: " + feedbackList);
+            ModelAndView mv = new ModelAndView("Feedback-Details");
+            mv.addObject("feedbackList", feedbackList);
+            return mv;
+        }
+
+        /*------------------------------------------------------------------------------------------*/
+        
+        @GetMapping("/customer-details")
+        public ModelAndView showCustomerDetails() {
+            List<GymUser> userList = userService.getAllCustomer();
+            System.out.println("User List: " + userList);
+            ModelAndView mv = new ModelAndView("Customer-Details");
+            mv.addObject("userList", userList);
+            return mv;
+        }
+        
+        @GetMapping("/deleteCustomer/{username}")
+        public ModelAndView deleteCustomer(@PathVariable("username") String username) {
+            System.out.println("Deleting user: " + username);
+            userService.deleteUserById(username);
+            return new ModelAndView("redirect:/customer-details");
+        }
 }

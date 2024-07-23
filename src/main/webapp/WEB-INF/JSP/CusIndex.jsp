@@ -88,7 +88,7 @@
         <h3>
             <ul>
                 <li><a href="/index">Home</a></li>
-                <li><a href="/gymSlotReport">Book Your Space</a></li>
+                <li><a href="/customer-gymSlotReport">Book Your Space</a></li>
                 <li><a href="/customerBooking">Booking Details</a></li>
                 <li><a href="/feedback">Feedback</a></li>
                 <li><a href="/logout">Logout</a>&nbsp;&nbsp;</li>
