@@ -41,6 +41,7 @@ public class GymUserService implements UserDetailsService {
 	}
 
 	public void deleteUserById(String username) {
+		
 		repository.delete(users);
 		
 	}

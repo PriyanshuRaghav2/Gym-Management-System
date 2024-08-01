@@ -84,12 +84,11 @@ public class GymUser extends User{
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	
 //	@Override
 //	public String toString() {
 //		return "GymUser [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
 //				+ lastName + ", email=" + email + ", type=" + type + "]";
 //	}
-	
 	
 }

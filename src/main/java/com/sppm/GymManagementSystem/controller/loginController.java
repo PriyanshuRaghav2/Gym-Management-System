@@ -18,12 +18,14 @@ public class loginController {
 	private BCryptPasswordEncoder bcrypt;
 	@Autowired
 	private GymUserService service;
+//	@Autowired
+//	private GymUser gymUser;
 	
 	@GetMapping("/register")
 	public ModelAndView showUserRegisterPage() {
-		GymUser user = new GymUser();
+		GymUser gymUser = new GymUser();
 		ModelAndView mv = new ModelAndView("newUserRegistration");
-		mv.addObject("userRecord",user);
+		mv.addObject("userRecord",gymUser);
 		return mv;
 	}
 	

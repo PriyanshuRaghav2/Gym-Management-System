@@ -89,7 +89,7 @@ button:hover {
 			<h2>Write us your Feedback</h2>
 			<input type="hidden" name="feedbackId" value="${feedback.feedbackId}"/>
 			<label for="fname">User name:</label><br> 
-			<input type="text"id="username" name="username" required><br>
+			<input type="text"id="username" name="username"  required><br>
 			 
 			<label for="feedback">Write Your Feedback:</label><br />
 			<textarea name="feedbackContent" rows="10" cols="30"placeholder="Write Us your Feedback"></textarea>

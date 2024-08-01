@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.userdetails.User;
 
 import com.sppm.GymManagementSystem.bean.Feedback;
 import com.sppm.GymManagementSystem.bean.GymBook;
@@ -27,7 +28,6 @@ import com.sppm.GymManagementSystem.dao.GymBookDao;
 import com.sppm.GymManagementSystem.dao.GymItemDao;
 import com.sppm.GymManagementSystem.dao.SlotDao;
 import com.sppm.GymManagementSystem.dao.SlotItemDao;
-import com.sppm.GymManagementSystem.exception.SeatAlreadyBookedException;
 import com.sppm.GymManagementSystem.exception.SeatNotAvailableException;
 import com.sppm.GymManagementSystem.service.GymItemService;
 import com.sppm.GymManagementSystem.service.GymUserService;
@@ -404,8 +404,9 @@ public class GymController {
         }
 
         @PostMapping("/feedback")
-        public ModelAndView submitFeedback(@ModelAttribute Feedback feedback, @RequestParam("username") String username,@RequestParam("feedbackContent") String feedbackContent) {
+        public ModelAndView submitFeedback(@ModelAttribute Feedback feedback,@RequestParam("feedbackContent") String feedbackContent,@AuthenticationPrincipal User user) {
         	feedback.setTimestamp(LocalDateTime.now());
+        	feedback.setUsername(user.getUsername());
         	feedbackDao.saveFeedback(feedback);
             return new ModelAndView("thankyou");
         }
@@ -418,22 +419,41 @@ public class GymController {
             mv.addObject("feedbackList", feedbackList);
             return mv;
         }
-
+        
         /*------------------------------------------------------------------------------------------*/
         
         @GetMapping("/customer-details")
         public ModelAndView showCustomerDetails() {
             List<GymUser> userList = userService.getAllCustomer();
-            System.out.println("User List: " + userList);
+            System.out.println(" User List: " + userList);
             ModelAndView mv = new ModelAndView("Customer-Details");
             mv.addObject("userList", userList);
             return mv;
         }
         
         @GetMapping("/deleteCustomer/{username}")
-        public ModelAndView deleteCustomer(@PathVariable("username") String username) {
-            System.out.println("Deleting user: " + username);
-            userService.deleteUserById(username);
+        public ModelAndView deleteCustomer(@PathVariable("username") String username, Principal principal) {
+          
+            String loggedInUsername = principal.getName();
+            String loggedInUserType = ((GymUser) userService.loadUserByUsername(loggedInUsername)).getType();
+
+            System.out.println("Logged in User Type: " + loggedInUserType);
+            System.out.println("Attempting to delete user: " + username);
+
+            if (loggedInUserType != null && loggedInUserType.equalsIgnoreCase("Admin")) {
+        
+                GymUser userToDelete = (GymUser) userService.loadUserByUsername(username);
+
+                if (userToDelete != null && userToDelete.getType().equalsIgnoreCase("Customer")) {
+                    userService.deleteUserById(username);
+                    System.out.println("Successfully deleted user: " + username);
+                } else {
+                    System.out.println("User to be deleted does not match CUSTOMER type or does not exist");
+                }
+            } else {
+                System.out.println("Logged in user does not have ADMIN privileges");
+            }
             return new ModelAndView("redirect:/customer-details");
         }
+
 }
