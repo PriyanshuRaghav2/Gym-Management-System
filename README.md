@@ -25,9 +25,9 @@
 <p>Gym Management System project features user authentication, slot scheduling, availability management, booking info management, feedback and an admin dashboard. Built with a Java full stack, it ensures efficient gym management operations.</p>
 
 <h2 id="er-diagram">ER Diagram:</h2>
-    
-![erd](https://github.com/user-attachments/assets/1225a5a5-9593-46fd-a26b-5e554dac03de)
+<p align = "center">ER Diagram</p> 
 
+<p align ="center" ![erd](https://github.com/user-attachments/assets/1225a5a5-9593-46fd-a26b-5e554dac03de)</p>
 <h2 id="ui-of-website">UI of the Website:</h2>
 <p>Click on the image to watch it.</p>
 
@@ -41,12 +41,11 @@
 <p>
     <strong>Admin-Side-Home-Page</strong><br>
     Home Page<br>
-    <strong>AddItem</strong><br>
-    Add GymItem<br>
-    <strong>slotBookingbyAdmin</strong><br>
-    Slot Booking By Admin<br>
-    <strong>ViewBooking</strong><br>
-    Manage Booking<br>
+    <strong>Add-Gym-Services</strong><br>
+    <strong>View-All-Gym-Services</strong><br>
+    <strong>Add-Gym-Slots</strong><br>
+    <strong>View-All-Gym-Slots</strong><br>
+    <strong>View-All-Booking</strong><br>
     <strong>Users</strong><br>
     Manage Users<br>
     <strong>UsersFeedback</strong><br>
