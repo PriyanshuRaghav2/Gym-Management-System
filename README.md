@@ -1,96 +1,67 @@
-<h1>Gym Management System</h1>
+<h1>✨ Gym Management System ✨</h1>
 
-<p>Welcome to the Gym Management System project! This application is designed to manage gym services, including slot management, booking management, and user roles (admin and customer). It is built using Java, Spring Boot, Spring MVC, MySQL, Maven, JSP, and CSS.</p>
+<p>Badge Badge Badge Badge</p>
 
-<h2>Table of Contents</h2>
+<h2>Tech Stack :</h2>
+<p>
+    <strong>Frontend:</strong> CSS, JavaScript, JSP<br>
+    <strong>Backend:</strong> Java, Spring Boot, Spring Framework, Spring Data JPA, Spring Security<br>
+    <strong>Database:</strong> MySQL, HQL<br>
+    <strong>Build Tool:</strong> Maven<br>
+    <strong>Code Editor and tools:</strong> Eclipse IDE<br>
+    <strong>Server:</strong> Tomcat
+</p>
 
+<h1>✨ Welcome to Gym Management System ✨</h1>
+
+<h2>Table of Contents:</h2>
 <ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#technologies-used">Technologies Used</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#project-structure">Project Structure</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#er-diagram">ER Diagram</a></li>
+    <li><a href="#ui-of-website">UI of Website</a></li>
 </ul>
 
-<h2 id="features">Features</h2>
+<h2 id="overview">Overview 🔨</h2>
+<p>Gym Management System project features user authentication, slot scheduling, availability management, booking info management, feedback and an admin dashboard. Built with a Java full stack, it ensures efficient gym management operations.</p>
 
-<ul>
-    <li>User authentication and authorization
-        <ul>
-            <li>Admin and Customer roles</li>
-        </ul>
-    </li>
-    <li>Gym service management
-        <ul>
-            <li>Add, update, delete gym items</li>
-        </ul>
-    </li>
-    <li>Slot management
-        <ul>
-            <li>Add, update, delete slots</li>
-        </ul>
-    </li>
-    <li>Booking management
-        <ul>
-            <li>Book, view, and delete bookings</li>
-        </ul>
-    </li>
-</ul>
+<h2 id="er-diagram">ER Diagram:</h2>
+    
+![erd](https://github.com/user-attachments/assets/1225a5a5-9593-46fd-a26b-5e554dac03de)
 
-<h2 id="technologies-used">Technologies Used</h2>
+<h2 id="ui-of-website">UI of the Website:</h2>
+<p>Click on the image to watch it.</p>
 
-<ul>
-    <li>Java</li>
-    <li>Spring Boot</li>
-    <li>Spring MVC</li>
-    <li>MySQL</li>
-    <li>Maven</li>
-    <li>JSP</li>
-    <li>CSS</li>
-</ul>
+<h3>LoginPage</h3>
+<p>Login Page</p>
+<h3>RegistrationPage</h3>
+<p>Registration Page</p>
 
-<h2 id="usage">Usage</h2>
+<h3>Admin Side:</h3>
 
-<p>Once the application is running, use the following endpoints to interact with the system:</p>
+<p>
+    <strong>Admin-Side-Home-Page</strong><br>
+    Home Page<br>
+    <strong>AddItem</strong><br>
+    Add GymItem<br>
+    <strong>slotBookingbyAdmin</strong><br>
+    Slot Booking By Admin<br>
+    <strong>ViewBooking</strong><br>
+    Manage Booking<br>
+    <strong>Users</strong><br>
+    Manage Users<br>
+    <strong>UsersFeedback</strong><br>
+    View Feedbacks
+</p>
 
-<ul>
-    <li>Admin login and management</li>
-    <li>Customer login and bookings</li>
-</ul>
+<h3>Member Side:</h3>
 
-<h2 id="project-structure">Project Structure</h2>
-
-<pre>
-<code>
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── example
-│   │   │           └── gymmanagement
-│   │   │               ├── controller
-│   │   │               ├── model
-│   │   │               ├── repository
-│   │   │               ├── service
-│   │   │               └── GymManagementApplication.java
-│   │   ├── resources
-│   │   │   ├── static
-│   │   │   ├── templates
-│   │   │   └── application.properties
-│   └── test
-│       └── java
-│           └── com
-│               └── example
-│                   └── gymmanagement
-└── pom.xml
-</code>
-</pre>
-
-<h2 id="contributing">Contributing</h2>
-
-<p>Contributions are welcome! Please fork the repository and create a pull request with your changes.</p>
-
-<h2 id="license">License</h2>
-
-<p>This project is licensed under the MIT License.</p>
+<p>
+    <strong>AboutPage</strong><br>
+    About Page<br>
+    <strong>ViewSlot</strong><br>
+    View Slot<br>
+    <strong>CancelBooking</strong><br>
+    Cancel Booking<br>
+    <strong>Feedback</strong><br>
+    Feedback
+</p>
